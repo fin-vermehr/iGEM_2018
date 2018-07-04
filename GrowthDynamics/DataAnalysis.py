@@ -1,0 +1,106 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sun Jul  1 15:40:37 2018
+
+@author: brayd
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+path = 'C:/Users/brayd/Documents/iGEM2018/GrowthDynamics/dummydata.txt'
+comment_char = '#'
+
+T, R1, R2, R3 = np.loadtxt(path, usecols=(0,1,2,3), unpack=True, comments=comment_char)
+
+plt.figure()
+plt.title('Trial R1')
+plt.scatter(T, R1, s=5)
+plt.xlabel('Time (hours)')
+plt.ylabel('OD')
+
+plt.figure()
+plt.title('Trial R2')
+plt.scatter(T, R2, s=5)
+plt.xlabel('Time (hours)')
+plt.ylabel('OD')
+
+plt.figure()
+plt.title('Trial R3')
+plt.scatter(T, R3, s=5)
+plt.xlabel('Time (hours)')
+plt.ylabel('OD')
+
+plt.figure()
+plt.title('All Trials')
+plt.scatter(T, R1, s=2, label = 'R1')
+plt.scatter(T, R2, s=3, label = 'R2')
+plt.scatter(T, R3, s=4, label = 'R3')
+plt.xlabel('Time (hours)')
+plt.ylabel('OD')
+plt.legend()
+
+def model(x, a, b):
+    return b*np.exp(a*x)
+
+means = np.zeros(len(R1))
+SEMs = np.zeros(len(R1))
+for i in range(len(R1)):
+    p = np.array([R1[i], R2[i], R3[i]])
+    mean = np.mean(p)
+    means[i] = mean
+    std = np.std(p)
+    SEM = std/np.sqrt(len(p))
+    SEMs[i] = SEM
+    
+plt.figure()
+plt.title('Averaged Data')
+plt.scatter(T, means, s=5)
+plt.errorbar(T, means, yerr=SEMs, fmt='.', color='green', markersize=5)
+plt.xlabel('Time (hours)')
+plt.ylabel('OD')
+plt.legend()
+
+exp = means[4:13]
+exp_err = SEMs[4:13]
+T_exp = T[4:13]
+
+p_opt, p_cov = curve_fit(model,T_exp, exp, sigma = exp_err)
+
+plt.figure()
+plt.title('Exponential Phase')
+plt.scatter(T_exp, exp, s=5, label='Averaged Experimental Data',color='green')
+plt.plot(T_exp, model(T_exp,*p_opt), label = 'Fitted Data')
+plt.errorbar(T_exp, exp, yerr=exp_err, fmt='.', color='green', markersize=5)
+plt.xlabel('Time (hours)')
+plt.ylabel('OD')
+plt.legend()
+
+fitted_data = model(T_exp,*p_opt)
+plt.figure()
+plt.scatter(T_exp, (fitted_data-exp), s=5,color='green')
+plt.errorbar(T_exp, (fitted_data-exp), yerr=exp_err, fmt='.', color='green', markersize=5)
+plt.title('Residuals Plot')
+plt.ylabel('Residuals, $y_{fitted}-y_{data}$')
+plt.xlabel('Time (hours)')
+plt.axhline(0, color='grey')
+
+log_dat = np.log(exp)
+plt.figure()
+plt.title('Exponential Phase Semilogy')
+plt.scatter(T_exp, exp, s=5,label='Averaged Experimental Data')
+plt.semilogy(T_exp, model(T_exp,*p_opt),label = 'Fitted Data')
+plt.errorbar(T_exp, exp, yerr=exp_err, fmt='.', color='green', markersize=5)
+plt.xlabel('Time (hours)')
+plt.ylabel('log(OD)')
+plt.legend()
+
+from red_chi_squared import red_chi_squared
+rcs = red_chi_squared(exp, fitted_data, exp_err, 2)
+print('Reduced Chi Squared for Exponential fit is',str(rcs))
+mu = p_opt[0]
+fit_err = np.sqrt(p_cov[0,0])
+print('The specific growth rate is', str(mu),'+/-', str(fit_err))
+
+
