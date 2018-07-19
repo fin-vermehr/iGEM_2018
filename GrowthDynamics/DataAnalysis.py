@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 
-path = 'C:/Users/brayd/Documents/iGEM2018/GrowthDynamics/dummydata.txt'
+path = 'C:/Users/brayd/iGEM_2018/GrowthDynamics/dummydata.txt'
 comment_char = '#'
 
 T, R1, R2, R3 = np.loadtxt(path, usecols=(0,1,2,3), unpack=True, comments=comment_char)
@@ -62,6 +62,25 @@ plt.xlabel('Time (hours)')
 plt.ylabel('OD')
 plt.legend()
 
+'''
+#determine index of last negative value
+neg = ([])
+for i in range(len(means)):
+    if means[i]<0:
+        neg.append(i)
+idx = max(neg)
+print(idx)
+#determine concavity via descretized 2nd derivative test
+#to do: incorporate error
+for i in range(idx+1,len(means)-2):
+    m1 = means[i+1]-means[i]
+    m2 = means[i+2]-means[i+1]
+    if m1>0 and (m2<(m1-9*np.mean(SEMs[i:i+2]))): # this corresponds to negative concavity
+        print(i)
+        break
+# need to consider convacity as an entensive property not instantaneous and thus consider change in slope trend over several consecutive indices
+'''       
+
 exp = means[4:13]
 exp_err = SEMs[4:13]
 T_exp = T[4:13]
@@ -86,7 +105,7 @@ plt.ylabel('Residuals, $y_{fitted}-y_{data}$')
 plt.xlabel('Time (hours)')
 plt.axhline(0, color='grey')
 
-log_dat = np.log(exp)
+#log_dat = np.log(exp)
 plt.figure()
 plt.title('Exponential Phase Semilogy')
 plt.scatter(T_exp, exp, s=5,label='Averaged Experimental Data')
