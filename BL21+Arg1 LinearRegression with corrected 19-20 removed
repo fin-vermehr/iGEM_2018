@@ -1,0 +1,8 @@
+
+https://docs.google.com/spreadsheets/d/1h5KcplkG7D3P8ItYyMpIDuX6LyGDtzKf1h-gkIiGAI0/edit?usp=sharing
+^use this
+> mydata2 <- read.xlsx("c:/XXXDESTINATIONXXXX", sheetName = "Sheet1")
+> plot(mydata2$X.Time, ((mydata2$X.R1 + mydata2$X.R2)/2))
+> line1 <- lm(formula = ((X.R1 + X.R2)/2) ~ X.Time, data = mydata2)
+> abline(line1)
+> lm(formula = ((X.R1 + X.R2)/2) ~ X.Time, data = mydata2)

@@ -27,22 +27,27 @@ end
 for i = 1 : numBatches
     
     % Getting a list of all image files in the folder.
-    Batch(i).batchPattern = fullfile(imageFolder, '*.jpg');
+    Batch(i).batchPattern = fullfile(imageFolder, '*.jpg'); %got to make pattern change here.
     Batch(i).batchFiles = dir(Batch(i).batchPattern);
     
-    %sort batch images by datenum. start from the lowest to the highest.
+    % Sort batch images by datenum. start from the lowest to the highest.
+    % Keep in mind the same datenum for some images. So order by name
+    % should not be affected.
     
-    Batch(i).imageName = extractField(Batch(i).batchFiles, 'name');
-    Batch(i).fullImageName = fullfile(imageFolder, imageName);
-    fprintf('Now reading %s\n', imageName);
+    Batch(i).imageName = extractField(Batch(i).batchFiles, 'name'); %error on this line.
+    Batch(i).fullImageName = fullfile(imageFolder, Batch(i).imageName);
+    fprintf('Now reading %s\n', Batch(i).imageName);
     Batch(i).imageArray = imread(Batch(i).fullImageName);
     %originalImage = rgb2gray(originalImage);
     
     % Display image and forcing it to update immediately.
     imshow(Batch(i).imageArray);
     drawnow;
-
+    
 %% Ground detection
+
+%per batch? Or for every image? -- may reduce time, but more resitant to
+%random errors? - may even induce some.
 
 %% Color area(s) detection
 
