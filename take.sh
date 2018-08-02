@@ -23,16 +23,13 @@ done
 for i in `seq 1 $n`; 
 do
 	FNAME=$(date +"%Y-%m-%d_%H%M")"_"$b$i
-	raspistill -hf -o /home/igem/iGEM_2018/capture/$FNAME.jpg
+	raspistill -hf -o /home/igem/gdrive/iGEM\ 2018/capture/$FNAME.jpg
 	echo "picture taken "$FNAME".jpg"
-
-	git add /home/igem/iGEM_2018/capture/$FNAME.jpg
-	git commit -m "automated upload" -q
 
     	sleep $t
 
 done
 
-#upload to github
-git push -q
+#push to google drive
+drive push ../gdrive/iGEM\ 2018/capture 
 echo "pictures uploaded"
