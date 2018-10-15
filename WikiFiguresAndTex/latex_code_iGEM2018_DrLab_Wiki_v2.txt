@@ -78,7 +78,7 @@ In order to run a bioreactor, we need to understand at what rate the E. coli gro
 \end{enumerate}
 If $N$ is the concentration of biomass population, then the exponential growth phase is given by:
 $$\dot{N} = \mu N$$
-where $\mu$ is the specific growth rate, the "rate of increase of cell concentrations per unit cell concentration" ($h^{-1}$) \cite{monod}. $\mu$ depends on the substrate concentration; the relation is given by the Monod equation:
+where $\mu$ is the specific growth rate, the ``rate of increase of cell concentrations per unit cell concentration'' ($h^{-1}$) \cite{monod}. $\mu$ depends on the substrate concentration; the relation is given by the Monod equation:
 $$ \mu(S) = \mu_m \frac{S}{K_S + S}$$
 where $S$ is the substrate concentration (in mol $\mathrm{L}^{-1}$) , and $K_S$ is the Monod Constant (in mol $\mathrm{L}^{-1}$). As substrate is consumed, more biomass is being created at the rate of:
 $$\frac{dN}{dS} = -\gamma \frac{dS}{dt}$$
