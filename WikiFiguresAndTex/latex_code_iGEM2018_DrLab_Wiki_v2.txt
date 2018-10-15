@@ -21,7 +21,7 @@
 
 
 \nomenclature{$\gamma$}{Yield Constant (unitless)}%
-\nomenclature{$\kappa$}{E. coli Death Rate ($\mathrm{h}^{-1}$)}%
+\nomenclature{$\kappa$}{\textit{E. coli} Death Rate ($\mathrm{h}^{-1}$)}%
 \nomenclature{$D = \frac{F}{V}$}{Dilution Rate ($\mathrm{h}^{-1}$)}%
 \nomenclature{$F$}{Flow Rate ($\mathrm{L} \mathrm{h}^{-1}$)}
 \nomenclature{$V$}{Total Volume ($\mathrm{L}$)}
@@ -29,15 +29,15 @@
 \nomenclature{$\alpha$}{Attachment Rate ($\mathrm{h}^{-1}$)}
 \nomenclature{$\mu_m$}{Maximum Specific Growth Rate ($\mathrm{h}^{-1}$)}
 \nomenclature{$K_s$}{Monod Constant (mol $\mathrm{L}^{-1}$)}
-\nomenclature{$\delta$}{Maximum Carrying Capacity Constant ($\mathrm{h}^{-1}$)}
+\nomenclature{$\delta$}{Maximum Carrying Capacity Constant (unitless)}
 \nomenclature{$N_i$}{Initial Cellular Concentration (mol $\mathrm{L}^{-1}$)}
 \nomenclature{$S_i$}{Initial Limiting Substrate Concentration (mol $\mathrm{L}^{-1}$)}
-\nomenclature{$Xu_i$}{Initial Metal Concentration within Waste-water (mol $\mathrm{L}^{-1}$)}
-\nomenclature{$Xw$}{Concentration of Bound Metal (mol $\mathrm{L}^{-1}$)}
+\nomenclature{$Xu_i$}{Initial Particle Concentration within Waste-water (mol $\mathrm{L}^{-1}$)}
+\nomenclature{$Xw$}{Concentration of Bound Particle (mol $\mathrm{L}^{-1}$)}
 \nomenclature{$\eta$}{Dynamic viscosity of waste-water ($\mathrm{kg\ ms^{-1}}$)}
 \nomenclature{$m_{\mathrm{particle}}$}{Atomic or molecular mass of substance to be sequestered ($\mathrm{g\ mol^{-1}}$)}
-\nomenclature{$m_{\mathrm{E.\ coli}}$}{Aproximate mass of E. coli cell}
-\nomenclature{$R_{\mathrm{E. \ coli}}$}{Approximate radius of E. coli cell in spherical approximation ($\mathrm{m}$)}
+\nomenclature{$m_{\mathrm{E.\ coli}}$}{Aproximate mass of \textit{E. coli} cell}
+\nomenclature{$R_{\mathrm{E. \ coli}}$}{Approximate radius of \textit{E. coli} cell in spherical approximation ($\mathrm{m}$)}
 \nomenclature{$v_{\mathrm{max}}$}{Maximum achievable velocity based on vertical displacement specification.}
 
 \begin{document}
@@ -48,7 +48,7 @@
 \newpage
 
 \section{Introduction}
-Our goal in the dry lab this year was to create four different models that allow our wet lab team to characterize their results, and allow future researchers to benchmark their results creating standard measures in the field of cellular flotation. First, we created a generic differential bioreactor model that allowed our team to predict the effectiveness of our E. coli cells to clean waste-waters if coupled with any surface binding method. We performed a complete sensitivity analysis on this model to allow future researchers to reuse this model with completely different parameters, strains of bacteria and object of waste. Then we created an algorithm that can track cellular flotation from frame to frame, and characterize exactly how the cells float; previously, we could only tell whether they floated or not. This coupled with our ODE buoyancy model allows us to define a maximum carrying capacity for each strain. Both of these models allowed our team to benchmark their results and will allow future researchers to quantify the performance of flotation as well.\\
+Our goal in the dry lab this year was to create four different models that allow our wet lab team to characterize their results, and allow future researchers to benchmark their results creating standard measures in the field of cellular flotation. First, we created a generic differential bioreactor model that allowed our team to predict the effectiveness of our \textit{E. coli} cells to clean waste-waters if coupled with any surface binding method. We performed a complete sensitivity analysis on this model to allow future researchers to reuse this model with completely different parameters, strains of bacteria and object of waste. Then we created an algorithm that can track cellular flotation from frame to frame, and characterize exactly how the cells float; previously, we could only tell whether they floated or not. This coupled with our ODE buoyancy model allows us to define a maximum carrying capacity for each strain. Both of these models allowed our team to benchmark their results and will allow future researchers to quantify the performance of flotation as well.\\
 \\
 \textbf{Note:} In the very end of this paper, we included a nomenclature defining all the variables used.
 
@@ -58,7 +58,7 @@ Our goal in the dry lab this year was to create four different models that allow
 \subsection{Goals}
 
 \begin{itemize}
-	\item Explore a possible application for our genetically engineered E. coli biomass that utilizes flotation.
+	\item Explore a possible application for our genetically engineered \textit{E. coli} biomass that utilizes flotation.
 	\item Develop a generic bioreactor that can be reused in many different conditions and for a variety of purposes.
 \end{itemize}
 
@@ -69,7 +69,7 @@ Our goal in the dry lab this year was to create four different models that allow
 
 \textbf{Monod Equation \cite{monod}}\
 \\
-In order to run a bioreactor, we need to understand at what rate the E. coli grow, and how they respond to environmental conditions. Bacterial growth can be separated into four phases:
+In order to run a bioreactor, we need to understand at what rate the \textit{E. coli} grow, and how they respond to environmental conditions. Bacterial growth can be separated into four phases:
 \begin{enumerate}
 	\item The Lag Phase: Little growth is observed.
 	\item The Exponential Phase: Exponential growth is observed after the cells get used to their environment, and so long as the limiting substrate is still in surplus.
@@ -91,26 +91,26 @@ where $t$ is time. $\gamma$ should be interpreted as ``the ratio of the mass of 
 		\includegraphics[width=0.8\textwidth]{bioreactor}
 	\end{center}
 \end{figure}
-\noindent Call the 'Main Reactor' (M.R) and the 'Flotation Tank' (F.T). Let $X_u$ be the concentration of E. coli (in mol $\mathrm{L}^{-1}$), $X_w$ the concentration of metal bound to the surface of the E. coli (in mol $\mathrm{L}^{-1}$). Below we will outline the steps of the bioreactor seen in Figure 1.
+\noindent Call the 'Main Reactor' (M.R) and the 'Flotation Tank' (F.T). Let $X_u$ be the concentration of \textit{E. coli} (in mol $\mathrm{L}^{-1}$), $X_w$ the concentration of particle bound to the surface of the \textit{E. coli} (in mol $\mathrm{L}^{-1}$). Below we will outline the steps of the bioreactor seen in Figure 1.
 \begin{enumerate}
-	\item All the substrate, waste and cellular population is homogeneously distributed between the F.T and the M.R. Initially there is no metal bound to any of the cells, i.e $X_w = 0$.
+	\item All the substrate, waste and cellular population is homogeneously distributed between the F.T and the M.R. Initially there is no particle bound to any of the cells, i.e $X_w = 0$.
 	\item When activated, the bioreactor begins to pump solution from the M.R to the F.T at rate $D$, this is represented by $D(N + X_u + X_w + S)$.
 	\item In the F.T, the cells are floating on the surface, and are scraped off and removed. Thus only $X_u$ and $S$ remain within the solution, which is pumped back into M.R at rate $D$. In practice, a cellular filter alike the one used for skimming could be placed at the exit of the F.T to capture any dead cells.
-	\item Within M.R the unbound metal binds to the E. coli with some rate constant $\alpha$, and detaches with some rate $\beta$ (equilibrium process).
-	\item This process operates until the metal concentration is as low as desired.
+	\item Within M.R the unbound particle binds to the \textit{E. coli} with some rate constant $\alpha$, and detaches with some rate $\beta$ (equilibrium process).
+	\item This process operates until the particle concentration is as low as desired.
 \end{enumerate}
 
 \subsubsection{Bioreactor Assumptions}
 \begin{itemize}
 	\item Our cell surface engineering technique has specificity to only one substance in the waste-water (i.e. the substance desired for removal).
-	\item We will only observe exponential bacterial growth within the reactor, i.e. the biomass has been cultured to sufficiently large optical density before being introduce into the bioreactor. 
-	\item Suspended metal particles attach to the surface of our E. coli at a rate proportional to the metal concentration and the ratio of unused area available on the surface.
-	\item Bound metal particles detach from the surface of our E. coli back into the waste-water at a rate proportional to the metal concentration bound to the E. coli.
-	\item Once the E. coli that are pumped out of the main chamber end up in the flotation tank, they are immediately removed -- no more growth nor unbinding of metal occurs.
+	\item We will only observe exponential bacterial growth within the reactor, i.e. the biomass has been cultured to sufficiently large optical density before being introduced into the bioreactor. 
+	\item Suspended particles attach to the surface of our \textit{E. coli} at a rate proportional to the particle concentration and the ratio of unused area available on the surface.
+	\item Bound particles detach from the surface of our \textit{E. coli} back into the waste-water at a rate proportional to the particle concentration bound to the \textit{E. coli}.
+	\item Once the \textit{E. coli} that are pumped out of the main chamber end up in the flotation tank, they are immediately removed -- no more growth nor unbinding of particle occurs.
 	\item We ignore all the spatial properties of pipes between the main reactor and flotation tank, as soon as part of the solution leaves the main take, it immediately arrives in the flotation tank, and vice versa.
-	\item The pipe leading into the flotation tank sprinkles the solution over the flotation tank so lightly that the E. coli cells do not sink into the tank -- they float on the surface, allowing for immediate removal.
+	\item The pipe leading into the flotation tank sprinkles the solution over the flotation tank so lightly that the \textit{E. coli} cells do not sink into the tank -- they float on the surface, allowing for immediate removal.
 	\item The solution within the main reactor is continuously mixed; it can be considered a homogeneous solution).
-	\item All the E. coli in the flotation tank float.
+	\item All the \textit{E. coli} in the flotation tank float.
 	\item A higher dilution rate ($D$) does not affect the detachment rate.
 \end{itemize}
 
@@ -118,16 +118,16 @@ where $t$ is time. $\gamma$ should be interpreted as ``the ratio of the mass of 
 \subsection{Equations}
 The dynamics within the bioreactor are given by:
 \begin{align}
-	\dot{N} &= N_i \mu (S) - N \cdot \left( D + \kappa \right)\\
-	\dot{S} &= -\mu (S) N \gamma^{-1}\\
-	\dot{X}_u &= \beta X_w - \alpha X_u \cdot \left(\frac{\delta N - X_w}{\delta N} \right)\\
-	\dot{X}_w &= - \beta X_w + \alpha X_u \cdot \left(\frac{\delta N - X_w}{\delta N} \right) - D X_w
+	\dot{N} &= N_i \mu (S) - N \cdot \left( D + \kappa \right) \label{N}\\
+	\dot{S} &= -\mu (S) N \gamma^{-1} \label{S}\\
+	\dot{X}_u &= \beta X_w - \alpha X_u \cdot \left(\frac{\delta N - X_w}{\delta N} \right) \label{Xu}\\
+	\dot{X}_w &= - \beta X_w + \alpha X_u \cdot \left(\frac{\delta N - X_w}{\delta N} \right) - D X_w \label{Xw}
 \end{align}
-Where, $\kappa$ is the death rate, $\delta$ the maximum carrying capacity of the cells, $\alpha$ the binding rate of metal to the cells and $\beta$ the detachment rate of metal from the cells.\\
+Where, $\kappa$ is the death rate, $\delta$ the maximum carrying capacity of the cells, $\alpha$ the rate constant for binding, $\beta$ the rate constant for unbinding.\\
 \\
-Equation (1) represents the change in E. coli cell concentration, equation (2) represents the change in limiting substrate concentration, equation (3) represents the change in unbound metal concentration, and equation (4) represents the change in concentration of metal bound to the surface of the E. coli.\\
+Equation \ref{N} represents the change in \textit{E. coli} cell concentration, equation \ref{S} represents the change in limiting substrate concentration, equation \ref{Xu} represents the change in unbound particle concentration, and equation \ref{Xw} represents the change in concentration of particle bound to the surface of the \textit{E. coli}.\\
 \\
-In equation (3) we have $\beta X_w$ \cite{bioreactor_1} which represents metal unbinding from the E. coli population, it depends on $\beta$: the kinetic detachment rate, and $X_w$: the concentration of metal that is bound to the surface of the E. coli. We are also removing metal from the solution by $\alpha X_u \cdot \left(\frac{\delta N - X_w}{\delta N} \right)$. This depends on the kinetic binding rate $\alpha$, the concentration of unbound metal within the solution ($X_u$), and the proportion of available binding sites on the E. coli, this is represented by $\left(\frac{\delta N - X_w}{\delta N} \right)$. Equation (4) is the negative of equation (3) but we also remove $X_w$ at some dilution rate $D$.\\
+In equation \ref{Xu} we have $\beta X_w$ \cite{bioreactor_1} which represents particle unbinding from the \textit{E. coli} population, it depends on $\beta$: the kinetic detachment rate, and $X_w$: the concentration of particle that is bound to the surface of the \textit{E. coli}. We are also removing particle from the solution by $\alpha X_u \cdot \left(\frac{\delta N - X_w}{\delta N} \right)$. This depends on the kinetic binding rate $\alpha$, the concentration of unbound particle within the solution ($X_u$), and the proportion of available binding sites on the \textit{E. coli}, this is represented by $\left(\frac{\delta N - X_w}{\delta N} \right)$. Equation \ref{Xw} is the negative of equation \ref{Xu} but we also remove $X_w$ at some dilution rate $D$.\\
 
 \subsection{Numerical Solution}
 
@@ -137,18 +137,18 @@ In equation (3) we have $\beta X_w$ \cite{bioreactor_1} which represents metal u
 		\includegraphics[width=0.75 \textwidth]{bioreactor_result}
 	\end{center}
 \end{figure}
-\noindent We solved the ODE system composed of equations (1) - (4) using the ODE45 solver in MATLAB (see the end of the paper of the MATLAB code), using the initial conditions $N_i = 0.4, S = 0.63, X_u = 0.5, X_w = 0$ and parameters:
+\noindent We numerically solved the ODE system composed of equations \ref{N} - \ref{Xw} using the ODE45 solver in MATLAB (see the end of the paper of the MATLAB code), using the initial conditions $N_i = 0.4, S = 0.63, X_u = 0.5, X_w = 0$ and parameters:
 
 \begin{multicols}{2}
 \begin{itemize}
-    \item $\gamma = 1.1$
-    \item $\kappa = 0.01$
-    \item $D = 3$
-    \item $\beta = 0.03$
-    \item $\alpha = 1.5$
-    \item $\mu_m = 0.8$
-    \item $K_s = 2.87 \times 10^{-7}$
-    \item $\delta = 1.5$
+    \item $\gamma = 1.1 \ (\mathrm{unitless})$
+    \item $\kappa = 0.01\ \mathrm{h^{-1}}$
+    \item $D = 3\ \mathrm{h^{-1}}$
+    \item $\beta = 0.03\ \mathrm{h^{-1}}$
+    \item $\alpha = 1.5\ \mathrm{h^{-1}}$
+    \item $\mu_m = 0.8\ \mathrm{h^{-1}}$
+    \item $K_s = 2.87 \times 10^{-7}\ \mathrm{mol \ L^{-1}}$
+    \item $\delta = 1.5 \ (\mathrm{unitless})$
 \end{itemize}
 \end{multicols}
 \noindent The above simulation was done for removing Cobalt from mining waste-water effluent. It utilizes a metal binding mechanism outlined in \cite{whittaker} which gave us a range of viable $\alpha$. We got $K_s$ and $ \mu_m$ from \cite{monod_harvard}, $\beta, $ and $\kappa$ from \cite{bioreactor_1}. We estimated reasonable values for $D, \gamma$. See \S 3.5 for calculating the value of $\delta$.\\
@@ -157,18 +157,18 @@ These results are incredibly promising. They show that the bioreactor can theore
 
 \subsection{Sensitivity Analysis}
 
-In order to understand the dynamics within the bioreactor, we performed a sensitivity analysis that estimates the relative effect of a single parameter on the performance of the system. Unfortunately, it is not possible to define an explicit function relating the different parameters to each other, we must perform a 'naive' analysis; we vary one parameter while holding all other constant, and see how this change affects the performance of the system. Performance is measured by how long it takes the bioreactor to remove the large majority of metal. We set some small $\varepsilon = 10^{-4} \mathrm{mol \ L^{-1}}$ to define a low threshold of acceptable metal concentration. For \S 2.5.1 - \S 2.5.6, we kept all the parameters at:
+In order to understand the dynamics within the bioreactor, we performed a sensitivity analysis that estimates the relative effect of a single parameter on the performance of the system. Unfortunately, it is not possible to define an explicit function relating the different parameters to each other, we must perform a 'naive' analysis; we vary one parameter while holding all other constant, and see how this change affects the performance of the system. Performance is measured by how long it takes the bioreactor to remove the large majority of the particle that is desired for bioremediation. We set some small $\varepsilon = 10^{-4} \mathrm{mol \ L^{-1}}$ to define a low threshold of acceptable particle concentration. For \S 2.5.1 - \S 2.5.6, we kept all the parameters at:
 
 \begin{multicols}{2}
 \begin{itemize}
-    \item $\gamma = 1.1$
-    \item $\kappa = 0.01$
-    \item $D = 3$
-    \item $\beta = 0.03$
-    \item $\alpha = 1.5$
-    \item $\mu_m = 0.8$
-    \item $K_s = 2.87 \times 10^{-7}$
-    \item $\delta = 1.5$
+    \item $\gamma = 1.1 \ (\mathrm{unitless})$
+    \item $\kappa = 0.01\ \mathrm{h^{-1}}$
+    \item $D = 3\ \mathrm{h^{-1}}$
+    \item $\beta = 0.03\ \mathrm{h^{-1}}$
+    \item $\alpha = 1.5\ \mathrm{h^{-1}}$
+    \item $\mu_m = 0.8\ \mathrm{h^{-1}}$
+    \item $K_s = 2.87 \times 10^{-7}\ \mathrm{mol \ L^{-1}}$
+    \item $\delta = 1.5 \ (\mathrm{unitless})$
 \end{itemize}
 \end{multicols}
 \noindent and only varied the parameter whose effect was measured.
@@ -206,7 +206,7 @@ In order to understand the dynamics within the bioreactor, we performed a sensit
 	\end{center}
 \end{figure}
 
-\noindent (See Figure 5) The higher the attachment rate ($\alpha$), the better the performance of the system. It does approach an asymptote quite quickly though. This is because of the maximum carrying capacity, at some point, there is just no more available space on the E. coli surface to bind more metal, regardless of the attachment rate.
+\noindent (See Figure 5) The higher the attachment rate ($\alpha$), the better the performance of the system. It does approach an asymptote quite quickly though. This is because of the maximum carrying capacity, at some point, there is just no more available space on the \textit{E. coli} surface to bind more particle, regardless of the attachment rate.
 
 \subsubsection{The Effect of Detachment Rate on Bioreactor Performance}
 
@@ -229,7 +229,7 @@ In order to understand the dynamics within the bioreactor, we performed a sensit
 	\end{center}
 \end{figure}
 
-\noindent (See Figure 7) The higher the initial E. coli population ($N_i$), the better the system performs. After some $N_i \approx 1$, it approaches an asymptote. 
+\noindent (See Figure 7) The higher the initial \textit{E. coli} population ($N_i$), the better the system performs. After some $N_i \approx 1$, it approaches an asymptote. 
 \newpage
 
 \subsubsection{The Effect of Maximum Specific Growth Rate on Bioreactor Performance}
@@ -245,15 +245,15 @@ In order to understand the dynamics within the bioreactor, we performed a sensit
 
 
 \subsection{Hypothetical Applications}
-The numerical simulations above were all based on parameters values specific to cobalt removal from mining waste-water. If the E. coli are coupled with a binding mechanism that is not specific to cobalt, then this generic bioreactor can be used for a large variety of applications (one simply has to change $\alpha$ and $\beta$). One very promising application is the removal of pharmaceuticals, such as penicillin, from municipal waste-water. The reactor is viable for many different binding methods, strains of E. coli, and initial concentrations of waste, as displayed in \S 2.5. This reactor is independent of volume, all the parameters are relative to each other, this system would perform the same with 1 $L$ of effluent as with $1 \times 10^10$ L of effluent. Evidently, the size of the chambers would need to be scaled appropriately. 
+The numerical simulations above were all based on parameters values specific to cobalt removal from mining waste-water. If the \textit{E. coli} are coupled with a binding mechanism that is not specific to cobalt, then this generic bioreactor can be used for a large variety of applications (one simply has to change $\alpha$ and $\beta$). One very promising application is the removal of pharmaceuticals, such as penicillin, from municipal waste-water. The reactor is viable for many different binding methods, strains of \textit{E. coli}, and initial concentrations of waste, as displayed in \S 2.5. This reactor is independent of volume, all the parameters are relative to each other, this system would perform the same with 1 $L$ of effluent as with $1 \times 10^{10}$ L of effluent. Evidently, the size of the chambers would need to be scaled appropriately. 
 
 \section{A Mechanistic Buoyancy Model: Maximum Carrying Capacity Determination}
 
 \subsection{Goal}
 The buoyancy model has 2 main goals:
 \begin{enumerate}
-    \item Determine the mean buoyant force experienced by the genetically engineered E. coli biomass as a result of gas vesicle formation from ARG1 over-expression. This effectively determines a mechanical upper bound for carrying capacity of the biomass. 
-    \item Characterize and quantify flotation observations from wet lab experimentation. It is not well known what the role of some of the secondary GVPs in the ARG1 construct is for gas vesicle formation, and being able to quantify flotation facilities comparison of different combinations of secondary GVPs for optimization of a gene construct specifically engineered for biomass flotation. 
+    \item Estimate the mean buoyant force experienced by the genetically engineered \textit{E. coli} biomass per unit mass as a result of gas vesicle formation from ARG1 over-expression. This effectively determines a mechanical upper bound for carrying capacity of the biomass. 
+    \item Characterize and quantify flotation observations from wet lab experimentation. It is not well known what the role of some of the secondary gas vesicle proteins (GVPs) in the ARG1 construct is for gas vesicle formation, and being able to quantify flotation facilities comparison of different combinations of secondary GVPs for optimization of a gene construct specifically engineered for biomass flotation. 
 \end{enumerate}
 \subsection{Mathematical Formulation}
 \subsubsection{Concepts}
@@ -294,11 +294,11 @@ F_{net} = F_g + F_B + F_D \implies m\frac{\mathrm{d}v}{\mathrm{d}t} = -mg + F_B 
 \end{equation}
 Rearrange...
 \begin{equation}\label{theODE}
-\frac{\mathrm{d}v}{\mathrm{d}t} - \frac{6\pi \eta R}{m}v = \big(\frac{F_B}{m} - g\big)
+\frac{\mathrm{d}v}{\mathrm{d}t} + \frac{6\pi \eta R}{m}v = \big(\frac{F_B}{m} - g\big)
 \end{equation}
 Simplify notation with $\alpha \coloneqq \frac{6\pi \eta R}{m}$ and $\beta \coloneqq \big(\frac{F_B}{m} - g\big)$ we have:
 \begin{equation}
-\frac{\mathrm{d}v}{\mathrm{d}t} - \alpha v = \beta
+\frac{\mathrm{d}v}{\mathrm{d}t} + \alpha v = \beta
 \end{equation}
 Observe the model is now in the form of equation \ref{ODE}.
 
@@ -314,12 +314,12 @@ Multiplying both sides we have:
 \end{equation}
 Now we integrate, divide by integrating factor, and impose an initial condition of $v(t = 0) = 0 \ \mathrm{ms^{-1}}$ (not moving initially):
 \begin{equation}\label{v}
-    v(t) = \frac{\beta}{\alpha}\big(1 - \mathrm{e}^{-\alpha t} \big) \equiv \big(\frac{F_B- mg}{6\pi\eta R} \big)\big(1 - \mathrm{e}^{\frac{-6\pi \eta R}{m}t} \big)
+    v(t) = \frac{\beta}{\alpha}\big(1 - \mathrm{e}^{-\alpha t} \big) \equiv \big(\frac{F_B- mg}{6\pi\eta R} \big)\big(1 - \mathrm{e}^{-\frac{6\pi \eta R}{m}t} \big)
 \end{equation}
 This is a closed form time-dependent solution for velocity. \\~\\
 Now we integrate one more time and impose an initial condition of $z(t = 0) = 0 \ \mathrm{m}$:
 \begin{equation}\label{z}
-z(t) = \bigg(\frac{F_B - mg}{g\pi\eta R} \bigg)\bigg(t + \frac{m}{6\pi \eta R}\big(\mathrm{e}^{\frac{6 \pi \eta R}{m}t} - 1 \big) \bigg)
+z(t) = \bigg(\frac{F_B - mg}{g\pi\eta R} \bigg)\bigg(t + \frac{m}{6\pi \eta R}\big(\mathrm{e}^{-\frac{6 \pi \eta R}{m}t} - 1 \big) \bigg)
 \end{equation}
 Finally, we have a closed form time-dependent solution for vertical displacement. \\~\\
 \textbf{NB:} $m,\ g,\ \eta,\ R$ are considered to be known, empirical constants. $F_B$ is left as a parameter that can be determined in a curve fit regression to a time-series of vertical displacement data for a floating biomass. 
@@ -331,7 +331,7 @@ Now that we have an expression for vertical displacement as a function of time w
 \begin{subfigure}{.5\textwidth}
   \centering
   \includegraphics[width=.5\linewidth]{1.jpg}
-  \caption{Cultured E. coli expressing RFP}
+  \caption{Cultured \textit{E. coli} expressing RFP}
   \label{fig:sub1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
@@ -349,7 +349,7 @@ Now that we have an expression for vertical displacement as a function of time w
 \caption{Example of image segmentation and clustering}
 \label{fig:test}
 \end{figure}
-Below is pseudo-code for a stochastic temporal tracking algorithm that is intended to maintain consistent cluster labeling from frame-to-frame and account for clusters combining and splitting. The time interval between frames should be chosen to be sufficiently small such that the probability of two binding/un-binding events occurring between any two frames can be assumed to be zero. 
+Below is pseudo-code for a stochastic temporal tracking algorithm that is intended to maintain consistent cluster labeling from frame-to-frame and account for clusters combining and splitting. The time interval between frames should be chosen to be sufficiently small such that the probability of more than one binding/un-binding events occurring between any two frames can be assumed to be zero. 
     \begin{itemize}
     \item Load directory with images.
     \item For $i$ up to number of frames (i.e. time steps):
@@ -409,7 +409,7 @@ The right side of the above inequality has strictly positive monotonicity with r
 \begin{equation}
     F_B \geq m_{\mathrm{E. \ coli}}g + 6\pi \eta R_{\mathrm{E. \ coli}} v_{\max}
 \end{equation}
-Taking $m$ to be the approximate mass of an E. coli cell (without bound particle), $R_{\mathrm{E. \ coli}}$ to be the approximate radius of an E. coli cell in a spherical approximation, this constraint on buoyant force influences goals in the wet lab by setting a minimum requirement for observed buoyant force in modifying ARG1 for optimized flotation performance. \\
+Taking $m_{\mathrm{E. \ coli}}$ to be the approximate mass of an \textit{E. coli} cell (without bound particle), $R_{\mathrm{E. \ coli}}$ to be the approximate radius of an \textit{E. coli} cell in a spherical approximation, this constraint on buoyant force influences goals in the wet lab by setting a minimum requirement for observed buoyant force in modifying ARG1 for optimized flotation performance. \\
 
 Once ARG1 is optimized for flotation and an estimate for $F_B$ is obtained, the maximal carrying capacity can be obtained as follows:
 \begin{equation}
@@ -421,16 +421,16 @@ Here $m = m_{\mathrm{E. \ coli}} + m_{\mathrm{bound}} $ (sum of cell mass with m
 \end{equation}
 Diving by the molecular or atomic mass, denote this $m_{particle}$ of the substance to be sequestered we have the following value for maximal carrying capacity $\delta$ in the bioreactor model:
 \begin{equation}
-    \delta = \frac{1}{m_{particle}}\big[\frac{F_B - 6\pi \eta R_{\mathrm{E. \ coli}} v_{\mathrm{max}}}{g} - m_{\mathrm{E. coli}}\big]
+    \delta = \frac{1}{m_{particle}}\big[\frac{F_B - 6\pi \eta R_{\mathrm{E. \ coli}} v_{\mathrm{max}}}{g} - m_{\mathrm{\textit{E. coli}}}\big]
 \end{equation}
-However, in the bioreactor model, the effluent is pumped from the main reactor in such a way that cells will not sink, so $v_max$ can be set to 0 and we see:
+However, in the bioreactor model, the effluent is pumped from the main reactor in such a way that cells will not sink, so $v_{\mathrm{max}}$ can be set to 0 and we see:
 \begin{equation}
-     \delta \approx \frac{1}{m_{particle}}\big[\frac{F_B}{g} - m_{\mathrm{E. coli}}\big]
+     \delta \approx \frac{1}{m_{particle}}\big[\frac{F_B}{g} - m_{\mathrm{\textit{E. coli}}}\big]
 \end{equation}
 See \S 2.3. This could influence the choice of expression levels in future cell surface engineering techniques. Too many surface receptors could result in accumulation of too much particle mass, eliminating ability for flotation. 
 \section{Growth Dynamics}
 \subsection{Objective}
-Our objective in this paper is to describe the growth dynamics of BL21 E. coli strain in lysogeny broth (LB). We have obtained two sets of observations from our wet lab team:{
+Our objective for this section is to describe the growth dynamics of BL21 \textit{E. coli} strain in lysogeny broth (LB). We have obtained two sets of observations from our wet lab team:{
 \begin{enumerate}
     \item 25 observations with $\Delta t =30$mins
     \item 40 observations with $\Delta t =30$mins
@@ -512,7 +512,7 @@ Oladeji, S. O., \& Saeed, M. D. (2015). \textit{Assessment of cobalt levels in w
 Whittaker MM, Mizuno K, Bächinger HP, Whittaker JW. \textit{Kinetic Analysis of the Metal Binding Mechanism of Escherichia coli Manganese Superoxide Dismutase}. Biophysical Journal. 2006;90(2):598-607. doi:10.1529/biophysj.105.071308.
 
 \bibitem{monod}
-\textit{Monod substrate affinity constant (Ks) for strain ML30 of E. coli growing on glucose as the only source of carbon and energy}. (n.d.). Retrieved October 13, 2018 from http://bionumbers.hms.harvard.edu/bionumber.aspx?s=n\&v=1\&id=111051.
+\textit{Monod substrate affinity constant (Ks) for strain ML30 of \textit{E. coli} growing on glucose as the only source of carbon and energy}. (n.d.). Retrieved October 13, 2018 from http://bionumbers.hms.harvard.edu/bionumber.aspx?s=n\&v=1\&id=111051.
 
 \bibitem{metalbinding1}
 N., Cetinel, S., Omar, S. I., Tuszynski, J. A., \& Montemagno, C. (2017). \textit{A computational method for selecting short peptide sequences for inorganic material binding.} Proteins: Structure, Function, and Bioinformatics, 85(11), 2024-2035. doi:10.1002/prot.25356 
@@ -527,7 +527,7 @@ Li, Pengsong \& Tao, Huchun. (2013). \textit{Cell surface engineering of microor
 Bengt Carlsson. (2009). \textit{An introduction to modeling of bioreactors.} Dept of Systems and Control, Information Technology Uppsala University. Retrieved October 13, 2018 from https://www.it.uu.se/edu/course/homepage/modynsyst/vt11/Lecture/DynSystBior2009.pdf.
 
 \bibitem{monod_harvard}
-\textit{Monod substrate affinity constant (Ks) for strain ML30 of E. coli growing on glucose as the only source of carbon and energy}. (n.d.). Retrieved October 13, 2018
+\textit{Monod substrate affinity constant (Ks) for strain ML30 of \textit{E. coli} growing on glucose as the only source of carbon and energy}. (n.d.). Retrieved October 13, 2018
 
 \bibitem{bioreactor_1}
 Chen, L., \& Chai, L. (2005). \textit{Mathematical Model and Mechanisms for Biofilm Wastewater Treatment Systems}. World Journal of Microbiology and Biotechnology, 21(8-9), 1455-1460. doi:10.1007/s11274-005-6565-2
